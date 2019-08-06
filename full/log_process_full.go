@@ -360,6 +360,10 @@ func init() {
 }
 
 func main() {
+	//学习初始化一个通道
+	//xc:=make(chan int,100)
+	//fmt.Println(xc)
+
 	reader, err := NewReader(path)
 	if err != nil {
 		panic(err)
