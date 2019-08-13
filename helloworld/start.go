@@ -8,9 +8,41 @@ import (
 /**
 go 语言不断学习中
 */
+
+/**go并发再学习 */
+func hellox(som string) {
+	for i := 1; i < 10; i++ {
+		//需要加上这个时间  否则  go hellox 没机会执行了
+		//Sleep(100 * Millisecond)
+		fmt.Println("hello " + som)
+	}
+}
+
+/**
+通道（channel）
+通道（channel）是用来传递数据的一个数据结构。
+通道可用于两个 goroutine 之间通过传递一个指定类型的值来同步运行和通讯。
+操作符 <- 用于指定通道的方向，发送或接收。如果未指定方向，则为双向通道。
+*/
+func vv(c int, d chan int) {
+	fmt.Println(c)
+	d <- c + 1 //将c+1写入 通道d
+}
+
 func main() {
-	fmt.Println("hello go")
-	startvar()
+	//go hellox("hwl")
+	//hellox("x")
+	//startvar()
+	//申明一个channel
+	s := make(chan int)
+	//v:=10
+	//ints<-v   //将10发送到通道ints
+	//hwl:=<-ints //将通道的值10赋值给hwl
+	go vv(10, s)
+	go vv(5, s)
+	x, y := <-s, <-s
+	fmt.Println(x, y, x+y)
+
 }
 
 /**定义方法 初始化变量 */
